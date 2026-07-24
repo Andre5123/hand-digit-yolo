@@ -1,7 +1,9 @@
 # A script that annotates any unlabelled images captured by capture.py with bounding boxes around the hands. 
+# It then crops the hand images from the bounding box and puts it in the data/crops folder to be classified as 0-5 fingers.
 # Press b, then click and drag to apply a bounding box. 
 # Press d when you are done annotating an image to move on to the next one.
-
+# Note that this only annotates the dimensions of the bounding box and not its class. Since it is manual, the data collection system was compartmentalized to make it more efficient.  
+# To add the class to the label, first manually label the cropped images with their class (0-5) using label_crops.py. Then automatically add the classes from the crops to the labels of the original images using classify_boxes.py
 from pathlib import Path
 import cv2
 

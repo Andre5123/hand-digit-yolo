@@ -1,3 +1,5 @@
+#This script automatically addes the class notation for each bounding box to the image label.
+#Note: as a prerequisite to adding the classes to the labels, the crops of the images must first have been classified from (0-5) using label_crops.py
 from pathlib import Path
 import re
 import shutil
