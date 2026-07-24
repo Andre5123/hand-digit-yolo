@@ -1,3 +1,7 @@
+# A script that annotates any unlabelled images captured by capture.py with bounding boxes around the hands. 
+# Press b, then click and drag to apply a bounding box. 
+# Press d when you are done annotating an image to move on to the next one.
+
 from pathlib import Path
 import cv2
 
