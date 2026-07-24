@@ -2,7 +2,8 @@
 
 Detect and count fingers (0–5) on one or two hands in real time using a webcam, via a custom YOLO-style object detection model built with TensorFlow and OpenCV.
 
-*(demo video)*
+## Demo
+![Demo](assets/annotated_recording-v5-sped-up.gif)
 
 ## Overview
 
@@ -25,10 +26,6 @@ The model detects hands in a webcam frame and simultaneously classifies how many
 - **src/models/classifier.py** - standalone VGG-style classifier (used for prototyping)
 - **src/training/loss.py** - custom YOLO loss, IoU metric, class accuracy
 - **src/training/train_detector.py** - training script for the unified detector
-
-## Demo
-
-![Demo](assets/annotated_recording-v5-sped-up.gif)
 
 ## Usage
 
