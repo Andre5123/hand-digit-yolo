@@ -2,6 +2,18 @@
 
 import cv2
 import time
+from pathlib import Path
+
+
+# Create the data pipeline
+Path("../../data/custom/images").mkdir(parents=True, exist_ok=True)
+Path("../../data/custom/labels").mkdir(parents=True, exist_ok=True)
+Path("../../data/custom/crops/unlabelled").mkdir(parents=True, exist_ok=True)
+Path("../../data/custom/crops/unclear").mkdir(parents=True, exist_ok=True)
+for i in range(6):
+    Path(f"../../data/custom/crops/{i}").mkdir(parents=True, exist_ok=True)
+Path("../../data/custom/excluded/images").mkdir(parents=True, exist_ok=True)
+Path("../../data/custom/excluded/labels").mkdir(parents=True, exist_ok=True)
 
 cam = cv2.VideoCapture(0)
 
@@ -15,7 +27,7 @@ image_counter = 0
 with open("image_counter.txt", "r") as f:
     image_counter = int(f.read().strip())
 
-capture_sequence_captions = [] # Customize this. It will display these captions for however many images you choose. Use them as visual cues to remind you what image you want to take.
+capture_sequence_captions = [] # Customize this list. It will display these captions for however many images you choose. Use them as visual cues to remind you what image you want to take.
 
 
 
@@ -23,6 +35,8 @@ break_interval = 10 # After how many photo captures should you take a break?
 break_time = 5 # How long the break should last
 countdown_time = 0.5 # How long the break should last
 
+
+# The following is a recommended "capture sequence" that creates a balanced number of examples of each class.
 
 single_hand = False
 # Single hand images. Remember to set break interval to 17.

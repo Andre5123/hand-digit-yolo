@@ -1,5 +1,9 @@
 venv/
-data/custom/
+data/custom/images/
+data/custom/labels/
+data/custom/crops/
+data/custom/excluded/
+data/custom/*.tfrecord
 models/*.keras
 !models/detector_v13_iou.keras
 models/*.weights.h5

@@ -12,6 +12,7 @@ labels_dir = Path("../../data/custom/labels")
 crops_dir = Path("../../data/custom/crops")
 unlabelled_dir = crops_dir / "unlabelled" # After cropping all of the crops will end up in this folder to be classified into categories later.
 
+
 for img_path in imgs_dir.glob("*.jpg"):
     label_path = labels_dir / (img_path.stem +".txt") # This checks if the image already has an annotated txt file (sharing the same name). If it does not, then it has not been annotated yet
     if label_path.exists():
