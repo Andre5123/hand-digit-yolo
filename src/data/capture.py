@@ -1,4 +1,4 @@
-# This script captures training images on the fly by taking pictures every few seconds automatically while providing cues for the user to adhere to in each photo.
+# This script captures training images on the fly by taking pictures every few seconds automatically while providing cues for the user to adhere to in each photo. Press q to quit.
 
 import cv2
 import time
@@ -92,7 +92,7 @@ else: # Toggle for adding two hand pictures. Remember to set break interval to 4
 
 for i in range(len(capture_sequence_captions)):
 
-    if i % break_interval == 0: #A break after every 4 captures giving the option to quitq
+    if i % break_interval == 0: #A break after every 4 captures giving the option to quit
         ret, frame = cam.read()
         print("breaktime")
         frame = cv2.flip(frame, 1)

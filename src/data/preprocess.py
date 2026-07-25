@@ -14,6 +14,9 @@ IMG_SIZE_CLASSIFIER = (128,128,3)
 
 YOLO_GRID_SIZE = (8,8)
 
+# ----------------------------
+# Classifier dataset functions
+#This is for the classifier model, not the detector model
 def load_single_classification_image(img_dir, label): # Loading function so that the dataset doesn't have to store all of the images at once
     img_dir = img_dir.numpy().decode("utf-8")
     img = cv2.imread(str(img_dir))
@@ -47,7 +50,6 @@ def make_custom_classification_datasets(crops_dir:str, batch_size:int, train_pro
     digits_tuples = []
     for i in range(6): # Digits 0 to 5
         digit_dir = crops_dir / str(i)
-        print(digit_dir)
         for img_dir in digit_dir.glob("*.jpg"):
             digits_tuples.append((img_dir, i))
     random.seed(42)
@@ -78,13 +80,13 @@ def preprocess_for_classifier(img):
 # ----------------------------
 # Detection dataset functions
 
+#Used for regular  image preprocessing (in live_demo.py or process_video.py)
 def preprocess_for_detector(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, (IMG_SIZE_DETECTOR[0], IMG_SIZE_DETECTOR[1]))
     img = (img/255.0).astype(np.float32)
-    img = np.expand_dims(img, axis=0)  # add batch dim → (1, 128, 128, 3)
+    img = np.expand_dims(img, axis=0)  # add batch dim: (1, 128, 128, 3)
     return img
-
 
 
 # Crops an image randomly but ensures that the bounding boxes stay within frame. Rewrites the label based on the new crop. Then resizes the image to the specified input size

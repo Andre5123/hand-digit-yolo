@@ -14,17 +14,19 @@ def conv_block(x, n_filters, l2=0.001):
 
 
 
-def build_detector(input_shape=(128, 128, 3)):
+def build_detector(input_shape=(256, 256, 3)):
     backbone = tf.keras.applications.MobileNetV2(
         input_shape=input_shape,
         include_top=False,
         weights='imagenet'
     )
-    backbone.trainable = False  # freeze pretrained weights initially
+    backbone.trainable = True
+    for layer in backbone.layers[:-50]: # Freeze everything except the last 50 layers
+        layer.trainable = False
     
     inputs = keras.Input(shape=input_shape)
     x = backbone(inputs, training=False)
-    outputs = layers.Conv2D(5, 1, activation=None)(x)
+    outputs = layers.Conv2D(11, 1, activation=None)(x)
     
     return keras.Model(inputs=inputs, outputs=outputs, name="detector_model")
 
@@ -40,4 +42,5 @@ def build_detector_old(input_shape=(256,256, 3)):
 
     model = keras.Model(inputs=image_inputs, outputs=outputs, name="detector_model")
     return model
+
 

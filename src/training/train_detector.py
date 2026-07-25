@@ -8,20 +8,21 @@ import tensorflow as tf
 
 from models.detector import build_detector
 from data.preprocess import make_tf_records_detection_datasets
-from loss import yolo_loss, iou_metric
+from loss import yolo_loss, iou_metric, class_accuracy
 
 import math
 
 model = build_detector()
-#model = tf.keras.models.load_model(
-    #"../../models/detector_best.keras",
-    #custom_objects={"yolo_loss": yolo_loss, "iou_metric": iou_metric}
-    #) # Toggle to keep improving on existing model
-
+'''
+model = tf.keras.models.load_model(
+    "../../models/detector_v9.keras",
+    custom_objects={"yolo_loss": yolo_loss, "iou_metric": iou_metric, "class_accuracy": class_accuracy}
+    ) # Toggle to keep improving on existing model
+'''
 model.compile(
-    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=5e-5),
     loss=yolo_loss,
-    metrics=[iou_metric]
+    metrics=[iou_metric, class_accuracy]
 )
 
 model.summary()
@@ -32,7 +33,7 @@ print(f"Train: {train_size}, Val: {val_size}, Test: {test_size}")
 
 model.fit(
     train_dataset,
-    epochs=100,
+    epochs=600,
     steps_per_epoch=math.ceil(train_size/32),
     validation_data=val_dataset,
     validation_steps=math.ceil(val_size/32),
@@ -50,17 +51,17 @@ model.fit(
             mode='max',
         ),
         tf.keras.callbacks.EarlyStopping(
-            patience=70,
-            monitor='val_loss',
+            patience=600,
+            monitor='loss',
             mode='min',
             restore_best_weights=True
         ),
         tf.keras.callbacks.ReduceLROnPlateau(
             factor=0.5,
-            patience=8,
-            monitor='val_loss',
+            patience=200,
+            monitor='loss',
             mode='min',
-            min_lr=1e-5
+            min_lr=1e-8
         )
     ]
 )

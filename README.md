@@ -19,8 +19,9 @@ The model detects hands in a webcam frame and simultaneously classifies how many
 - **src/record.py** - record raw webcam footage
 - **src/process_video.py** - annotate a recorded video offline
 - **src/data/capture.py** - rapid frame capture for data collection
-- **src/data/annotate.py** - draw bounding boxes on captured frames
-- **src/data/label.py** - assign digit class labels to hand crops
+- **src/data/annotate_boxes.py** - draw bounding boxes on captured frames
+- **src/data/label_crops.py** - assign digit class labels to hand crops
+- **src/data/classify_boxes.py** - add the class labels given to the hand crops into the image labels
 - **src/data/create_tfrecords.py** - convert dataset to TFRecord format
 - **src/models/detector.py** - MobileNetV2-based YOLO detector
 - **src/models/classifier.py** - standalone VGG-style classifier (used for prototyping)
