@@ -50,7 +50,7 @@ python process_video.py  # outputs annotated_recording.mp4
 
 All training data was self-collected using the three-script pipeline in `src/data/`. Frames were captured with `capture.py`, bounding boxes were drawn with `annotate.py`, and digit labels were assigned with `label.py`.
 
-The dataset consists of 2,111 annotated images collected across 5 different indoor and outdoor locations, with varied backgrounds, lighting conditions, and hand distances from the camera. 251 images contain no hands at all (negative examples) to reduce false positives. After annotation and labelling, 6,687 labelled crop images were produced for classifier training.
+The dataset consists of 6,687 annotated images collected across 5 different indoor and outdoor locations, with varied backgrounds, lighting conditions, and hand distances from the camera. Around 300 images contain no hands at all (negative examples) to reduce false positives. After annotation and labelling, 6,687 labelled crop images were produced for classifier training.
 
 ## Model Architecture
 
@@ -86,7 +86,7 @@ A standalone VGG-style classifier was trained first as a baseline before moving 
 
 ## What Didn't Work
 
-One early attempt used a public ASL digit dataset — the model reached 100% validation accuracy but completely failed on webcam footage. The training images had a consistent dark background, fixed hand position, and no variation in lighting, so the model learned background artifacts rather than hand shapes. Switching to self-collected data that matched the deployment environment fixed this entirely.
+One early attempt used a public ASL digit dataset — the model completely failed on webcam footage. The training images had a consistent dark background, fixed hand position, and no variation in lighting, so the model learned background artifacts rather than hand shapes. Switching to self-collected data that matched the deployment environment fixed this entirely.
 
 A binary edge detection preprocessing step was also explored (adaptive thresholding + morphological operations) before feeding images to the detector, but colour images consistently produced better results.
 
@@ -105,4 +105,4 @@ A binary edge detection preprocessing step was also explored (adaptive threshold
 
 ---
 
-Built by Andre — Computer Engineering, University of Waterloo (incoming 1A)
+Built by Andre Hoe — Computer Engineering, University of Waterloo (incoming 1A)
