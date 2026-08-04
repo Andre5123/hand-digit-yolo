@@ -50,7 +50,7 @@ python process_video.py  # outputs annotated_recording.mp4
 
 All training data was self-collected using the three-script pipeline in `src/data/`. Frames were captured with `capture.py`, bounding boxes were drawn with `annotate.py`, and digit labels were assigned with `label.py`.
 
-The dataset consists of 6,687 annotated images collected across 5 different indoor and outdoor locations, with varied backgrounds, lighting conditions, and hand distances from the camera. Around 300 images contain no hands at all (negative examples) to reduce false positives. After annotation and labelling, 6,687 labelled crop images were produced for classifier training.
+The dataset consists of 6,687 annotated images collected across 5 different indoor and outdoor locations, with varied backgrounds, lighting conditions, and hand distances from the camera. Around 500 images contain no hands at all (negative examples) to reduce false positives. After annotation and labelling, 6,687 labelled crop images were produced for classifier training.
 
 ## Model Architecture
 
